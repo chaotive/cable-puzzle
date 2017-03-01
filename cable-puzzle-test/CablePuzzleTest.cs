@@ -20,5 +20,25 @@ namespace cable_puzzle_test
             Assert.AreEqual(Piece.Type.Straight, cp.pieces[1].type);
             Assert.AreEqual(Piece.Orientation.Down, cp.pieces[1].orientation);
         }
+
+        [TestMethod]
+        public void cablePuzzleRotate()
+        {
+            var cp = new CablePuzzle(new List<string> { "03" });
+
+            Assert.AreEqual(Piece.Orientation.Right, cp.rotate(0));            
+            Assert.AreEqual(Piece.Type.Straight, cp.pieces[0].type);
+            Assert.AreEqual(Piece.Orientation.Right, cp.pieces[0].orientation);
+        }
+
+        [TestMethod]
+        public void cablePuzzleCheckSolved()
+        {
+            var pieces = new List<string> { "03" };
+            var cp = new CablePuzzle(pieces);
+
+            Assert.AreEqual(false, cp.checkSolved());
+            Assert.AreEqual(true, cp.checkSolved(pieces));
+        }
     }
 }

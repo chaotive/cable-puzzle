@@ -8,6 +8,8 @@ namespace cable_puzzle
         public enum Type { Straight, Corner }
         public enum Orientation { Right, Down, Left, Up }
 
+        public static int MaxOrientation = Enum.GetValues(typeof(Orientation)).Length;
+
         public Type type;
         public Orientation orientation;
 
@@ -28,5 +30,10 @@ namespace cable_puzzle
 
             //Debug.WriteLine(this.type + " " + this.orientation);
         }
+
+        public string getAsString() {
+            return string.Concat((int)type, (int)orientation);
+        }
+
     }
 }
