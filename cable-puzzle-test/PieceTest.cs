@@ -9,10 +9,19 @@ namespace cable_puzzle_test
     public class PieceTest
     {
         [TestMethod]
-        public void constructor()
+        public void pieceConstructor()
         {
             var t = new Piece(Piece.Type.Straight, Piece.Orientation.Right);
-            Debug.Write(t.type + " " + t.orientation);
+            Assert.AreEqual(Piece.Type.Straight, t.type);
+            Assert.AreEqual(Piece.Orientation.Right, t.orientation);
+
+            t = new Piece("00");
+            Assert.AreEqual(Piece.Type.Straight, t.type);
+            Assert.AreEqual(Piece.Orientation.Right, t.orientation);
+
+            t = new Piece("12");
+            Assert.AreEqual(Piece.Type.Corner, t.type);
+            Assert.AreEqual(Piece.Orientation.Left, t.orientation);
         }
     }
 }

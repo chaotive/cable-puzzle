@@ -10,12 +10,15 @@ namespace cable_puzzle_test
     public class CablePuzzleTest
     {
         [TestMethod]
-        public void constructor()
-        {
-            var cp = new CablePuzzle(new List<string> {"00", "01" });
-            foreach(Piece p in cp.pieces) {
-                Debug.Write(p.type + " " + p.orientation);
-            }
+        public void cablePuzzleConstructor()
+        {            
+            var cp = new CablePuzzle(new List<string> {"00", "01"});
+
+            Assert.AreEqual(Piece.Type.Straight, cp.pieces[0].type);
+            Assert.AreEqual(Piece.Orientation.Right, cp.pieces[0].orientation);
+
+            Assert.AreEqual(Piece.Type.Straight, cp.pieces[1].type);
+            Assert.AreEqual(Piece.Orientation.Down, cp.pieces[1].orientation);
         }
     }
 }

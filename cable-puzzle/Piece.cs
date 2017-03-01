@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace cable_puzzle
 {    
     public class Piece
     {
-        public enum Type { Straight, Rounded }
+        public enum Type { Straight, Corner }
         public enum Orientation { Right, Down, Left, Up }
 
         public Type type;
@@ -24,6 +25,8 @@ namespace cable_puzzle
         private void init(Type type, Orientation orientation) {
             this.type = type;
             this.orientation = orientation;
+
+            //Debug.WriteLine(this.type + " " + this.orientation);
         }
     }
 }
