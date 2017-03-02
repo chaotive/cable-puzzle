@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using cable_puzzle;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace cable_puzzle_test
 {
@@ -33,12 +34,27 @@ namespace cable_puzzle_test
 
         [TestMethod]
         public void cablePuzzleCheckSolved()
-        {
-            var pieces = new List<string> { "03" };
+        {            
+            var pieces = new List<string> { "01" };
+            var solutionPath = new List<int> { 0 };
             var cp = new CablePuzzle(pieces);
 
+            Assert.AreEqual(false, cp.checkSolved(new List<string> { "02" }, solutionPath));
+            Assert.AreEqual(true, cp.checkSolved(pieces, solutionPath));
+            cp.pieces[0] = new Piece("03");
+            Assert.AreEqual(true, cp.checkSolved(pieces, solutionPath));
+         
+            cp = new CablePuzzle();
+
             Assert.AreEqual(false, cp.checkSolved());
-            Assert.AreEqual(true, cp.checkSolved(pieces));
+            //Assert.AreEqual(true, cp.checkSolved(cp.pieces.Select(p => p.getAsString()).ToList()));
+        }
+
+        [TestMethod]
+        public void cablePuzzleGenerateDefaultPieces()
+        {
+            var pieces = CablePuzzle.generateDefaultPieces();
+            pieces.ForEach(p => Debug.WriteLine(p));
         }
     }
 }

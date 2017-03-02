@@ -12,6 +12,7 @@ namespace cable_puzzle
 
         public Type type;
         public Orientation orientation;
+        public bool matches;
 
         public Piece(string typeAndOrientation) {
             init(
@@ -32,7 +33,28 @@ namespace cable_puzzle
         }
 
         public string getAsString() {
+            return getAsString(orientation);
+        }
+
+        public string getAsString(Orientation orientation) {
             return string.Concat((int)type, (int)orientation);
+        }
+
+        public override string ToString() {
+            return "Piece(" + type + "," + orientation + "," + matches + ")";
+        }
+
+        public bool Equals(string piece) {
+            Debug.WriteLine("Comparing " + piece + " to " + ToString());
+            var pieceStr = "";
+
+            if (type == Type.Straight & orientation == Orientation.Left)
+                pieceStr = getAsString(Orientation.Right);
+            else if (type == Type.Straight & orientation == Orientation.Up)
+                pieceStr = getAsString(Orientation.Down);
+            else pieceStr = getAsString();
+
+            return piece == pieceStr;
         }
 
     }
