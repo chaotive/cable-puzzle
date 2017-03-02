@@ -46,8 +46,8 @@ namespace cable_puzzle_test
          
             cp = new CablePuzzle();
 
-            Assert.AreEqual(false, cp.checkSolved());
-            //Assert.AreEqual(true, cp.checkSolved(cp.pieces.Select(p => p.getAsString()).ToList()));
+            Assert.AreEqual(false, cp.checkSolved());            
+            Assert.AreEqual(true, cp.checkSolved(cp.pieces.Select(p => p.getAsString()).ToList()));
         }
 
         [TestMethod]

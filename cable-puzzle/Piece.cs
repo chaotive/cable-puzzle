@@ -44,17 +44,21 @@ namespace cable_puzzle
             return "Piece(" + type + "," + orientation + "," + matches + ")";
         }
 
-        public bool Equals(string piece) {
+        public bool Equals(string piece) { return Equals(new Piece(piece)); }
+
+        public bool Equals(Piece piece)
+        {
             Debug.WriteLine("Comparing " + piece + " to " + ToString());
-            var pieceStr = "";
-
-            if (type == Type.Straight & orientation == Orientation.Left)
-                pieceStr = getAsString(Orientation.Right);
-            else if (type == Type.Straight & orientation == Orientation.Up)
-                pieceStr = getAsString(Orientation.Down);
-            else pieceStr = getAsString();
-
-            return piece == pieceStr;
+            
+            if (piece.type == type) {
+                if (type == Type.Straight & (orientation == Orientation.Left || orientation == Orientation.Right))
+                    return piece.orientation == Orientation.Left || piece.orientation == Orientation.Right;
+                else if (type == Type.Straight & (orientation == Orientation.Up || orientation == Orientation.Down))
+                    return piece.orientation == Orientation.Up || piece.orientation == Orientation.Down;
+                else return piece.orientation == orientation;
+            }
+            else return false;            
+            
         }
 
     }
