@@ -8,12 +8,12 @@ using System.Linq;
 namespace cable_puzzle_test
 {
     [TestClass]
-    public class CablePuzzleTest
+    public class CablePuzzleGameTest
     {
         [TestMethod]
         public void cablePuzzleConstructor()
         {            
-            var cp = new CablePuzzle(new List<string> {"00", "01"});
+            var cp = new CablePuzzleGame(new List<string> {"00", "01"});
 
             Assert.AreEqual(Piece.Type.Straight, cp.pieces[0].type);
             Assert.AreEqual(Piece.Orientation.Right, cp.pieces[0].orientation);
@@ -25,7 +25,7 @@ namespace cable_puzzle_test
         [TestMethod]
         public void cablePuzzleRotate()
         {
-            var cp = new CablePuzzle(new List<string> { "03" });
+            var cp = new CablePuzzleGame(new List<string> { "03" });
 
             Assert.AreEqual(Piece.Orientation.Right, cp.rotate(0));            
             Assert.AreEqual(Piece.Type.Straight, cp.pieces[0].type);
@@ -37,14 +37,14 @@ namespace cable_puzzle_test
         {            
             var pieces = new List<string> { "01" };
             var solutionPath = new List<int> { 0 };
-            var cp = new CablePuzzle(pieces);
+            var cp = new CablePuzzleGame(pieces);
 
             Assert.AreEqual(false, cp.checkSolved(new List<string> { "02" }, solutionPath));
             Assert.AreEqual(true, cp.checkSolved(pieces, solutionPath));
             cp.pieces[0] = new Piece("03");
             Assert.AreEqual(true, cp.checkSolved(pieces, solutionPath));
          
-            cp = new CablePuzzle();
+            cp = new CablePuzzleGame();
 
             Assert.AreEqual(false, cp.checkSolved());            
             Assert.AreEqual(true, cp.checkSolved(cp.pieces.Select(p => p.getAsString()).ToList()));
@@ -53,7 +53,7 @@ namespace cable_puzzle_test
         [TestMethod]
         public void cablePuzzleGenerateDefaultPieces()
         {
-            var pieces = CablePuzzle.generateDefaultPieces();
+            var pieces = CablePuzzleGame.generateDefaultPieces();
             pieces.ForEach(p => Debug.WriteLine(p));
         }
     }

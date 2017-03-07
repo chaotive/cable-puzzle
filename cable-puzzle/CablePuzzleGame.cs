@@ -6,7 +6,7 @@ using System.Text;
 
 namespace cable_puzzle
 {
-    public class CablePuzzle
+    public class CablePuzzleGame
     {
         public List<Piece> pieces = new List<Piece>();
         private List<string> defaultSolution = new List<string> {
@@ -19,7 +19,7 @@ namespace cable_puzzle
         };
         public bool solved = false;
 
-        public CablePuzzle(List<string> pieces = null) {
+        public CablePuzzleGame(List<string> pieces = null) {
             pieces = pieces ?? generateDefaultPieces();
             foreach (string pp in pieces) {                
                 this.pieces.Add(new Piece(pp));
