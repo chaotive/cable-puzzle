@@ -9,30 +9,22 @@ namespace cable_puzzle
     public class CablePuzzleGame
     {
         public List<Piece> pieces = new List<Piece>();
-        private List<string> defaultSolution = new List<string> {
-            "00", "00", "11",
-            "00", "10", "01",
-            "00", "00", "13"
-        };
-        private List<int> defaultSolutionPath = new List<int> {
-            0, 1, 2, 5, 8
-        };
+        public int solutionIndex;
         public bool solved = false;
 
         public CablePuzzleGame(List<string> pieces = null) {
-            pieces = pieces ?? generateDefaultPieces();
+            Random ran = new Random();
+            solutionIndex = ran.Next(Solution.predefs.Count);
+            
+            pieces = pieces ?? generateDefaultPieces(solutionIndex);
             foreach (string pp in pieces) {                
                 this.pieces.Add(new Piece(pp));
             }                        
         }
 
-        public static List<string> generateDefaultPieces() {
-            Random ran = new Random();            
-            var piecesTemplate = new List<string> {
-                "0", "0", "1",
-                "0", "1", "0",
-                "0", "0", "1"
-            };
+        public static List<string> generateDefaultPieces(int solutionIndex = 0) {
+            Random ran = new Random();
+            var piecesTemplate = Solution.predefs[solutionIndex].generateTemplate();
             return piecesTemplate.Select(p => p + ran.Next(Piece.MaxOrientation)).ToList();
         }
               
@@ -47,8 +39,8 @@ namespace cable_puzzle
         
         public bool checkSolved(List<string> solution = null, List<int> solutionPath = null) {
             Debug.WriteLine("checkSolved");
-            solution = solution ?? defaultSolution;
-            solutionPath = solutionPath ?? defaultSolutionPath;
+            solution = solution ?? Solution.predefs[solutionIndex].pieces;
+            solutionPath = solutionPath ?? Solution.predefs[solutionIndex].path;
             var allMatch = true;
             
             foreach (int pi in solutionPath) {
