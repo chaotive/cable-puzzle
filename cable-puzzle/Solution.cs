@@ -5,9 +5,9 @@ using System.Text;
 
 namespace cable_puzzle
 {
-    enum PinPosition { Up, Middle, Down }
+    public enum PinPosition { Up, Middle, Down }
 
-    struct Pins {
+    public struct Pins {
         public PinPosition startPin;
         public PinPosition endPin;
 
@@ -17,9 +17,35 @@ namespace cable_puzzle
         }
     }
 
-    class Solution
+    public class Solution
     {
         public static List<Solution> predefs = new List<Solution>(){
+            new Solution(
+                new List<string> {
+                    "00", "11", "10",
+                    "11", "12", "01",
+                    "13", "00", "12"
+                },
+                new List<int> {
+                    0, 1, 4,
+                    3, 6, 7,
+                    8, 5, 2
+                },
+                new Pins(PinPosition.Up, PinPosition.Up)
+            ),
+            /*new Solution(
+                new List<string> {
+                    "00", "00", "11",
+                    "10", "00", "12",
+                    "13", "00", "00"
+                },
+                new List<int> {
+                    0, 1, 2,
+                    5, 4, 3,
+                    6, 7, 8
+                },
+                new Pins(PinPosition.Up, PinPosition.Middle)
+            ),*/
             new Solution(
                 new List<string> {
                     "00", "00", "11",

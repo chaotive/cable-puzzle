@@ -53,7 +53,8 @@ namespace cable_puzzle_test
         [TestMethod]
         public void cablePuzzleGenerateDefaultPieces()
         {
-            var pieces = CablePuzzleGame.generateDefaultPieces();
+            var cp = new CablePuzzleGame();
+            var pieces = cp.generateDefaultPieces();
             pieces.ForEach(p => Debug.WriteLine(p));
         }
     }

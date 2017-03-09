@@ -10,21 +10,23 @@ namespace cable_puzzle
     {
         public List<Piece> pieces = new List<Piece>();
         public int solutionIndex;
+        public Solution solution;
         public bool solved = false;
 
         public CablePuzzleGame(List<string> pieces = null) {
             Random ran = new Random();
             solutionIndex = ran.Next(Solution.predefs.Count);
+            solution = Solution.predefs[solutionIndex];
             
-            pieces = pieces ?? generateDefaultPieces(solutionIndex);
+            pieces = pieces ?? generateDefaultPieces();
             foreach (string pp in pieces) {                
                 this.pieces.Add(new Piece(pp));
             }                        
         }
 
-        public static List<string> generateDefaultPieces(int solutionIndex = 0) {
+        public List<string> generateDefaultPieces() {
             Random ran = new Random();
-            var piecesTemplate = Solution.predefs[solutionIndex].generateTemplate();
+            var piecesTemplate = solution.generateTemplate();
             return piecesTemplate.Select(p => p + ran.Next(Piece.MaxOrientation)).ToList();
         }
               
@@ -39,8 +41,8 @@ namespace cable_puzzle
         
         public bool checkSolved(List<string> solution = null, List<int> solutionPath = null) {
             Debug.WriteLine("checkSolved");
-            solution = solution ?? Solution.predefs[solutionIndex].pieces;
-            solutionPath = solutionPath ?? Solution.predefs[solutionIndex].path;
+            solution = solution ?? this.solution.pieces;
+            solutionPath = solutionPath ?? this.solution.path;
             var allMatch = true;
             
             foreach (int pi in solutionPath) {
